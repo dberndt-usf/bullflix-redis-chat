@@ -8,7 +8,24 @@ Your exercise is to finish [summarize.py](summarize.py), which adds rolling summ
 
 ## Setup
 
-You need Python 3.10+ and Docker Desktop (running).
+You need:
+
+- **Python 3.10 or newer**
+- **Docker Desktop**, running (it runs Redis for you). No Docker? See [Using a hosted Redis](#using-a-hosted-redis).
+- **[Ollama](https://ollama.com)**, only if you want a real model instead of the offline echo bot
+
+### Get the code
+
+With git:
+
+```bash
+git clone https://github.com/dberndt-usf/bullflix-redis-chat.git
+cd bullflix-redis-chat
+```
+
+Without git: open [github.com/dberndt-usf/bullflix-redis-chat](https://github.com/dberndt-usf/bullflix-redis-chat), click **Code**, then **Download ZIP**. Unzip it (the folder is usually called `bullflix-redis-chat-main`) and open a terminal in that folder.
+
+### Install the Python packages and start Redis
 
 macOS / Linux:
 
@@ -30,6 +47,16 @@ pip install -r requirements.txt
 If PowerShell says "running scripts is disabled on this system", you can skip activating: run the virtual environment's Python directly, as `.venv\Scripts\python chat_demo.py ...` instead of `python chat_demo.py ...`. Or allow local scripts once with `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` and try again.
 
 If another Redis is already using port 6379 (for example, from the Redis lab), `docker compose up -d` fails with a port error. Either stop the other one with `docker compose down` in its folder, or skip this step and use the Redis that's already running.
+
+### Optional: a local model
+
+To chat with a real model, install Ollama and download a small one (about 1.3 GB):
+
+```bash
+ollama pull llama3.2:1b
+```
+
+Then add `--model ollama:llama3.2:1b` when you run the demo (see [Choosing a model](#choosing-a-model)). Without a graphics card, expect a few seconds per reply, and a slower first reply while the model loads.
 
 ## Run it
 
