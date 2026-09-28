@@ -121,10 +121,10 @@ df = pd.read_json("telemetry.jsonl", lines=True)
 3. **Watch a real model forget.** With a real model, try:
 
    ```bash
-   python chat_demo.py --verbose --model ollama:llama3.2:3b --max-context-tokens 120
+   python chat_demo.py --verbose --model ollama:llama3.2:3b --max-context-tokens 300
    ```
 
-   Tell it your name, ask two or three other questions, then ask "What is my name?". Once your first message is left out of the context, the model can't answer, even though the message is still in Redis. The model itself remembers nothing between calls; it only knows what's sent each time.
+   Tell it your name, then ask other questions while watching the `[context]` line. Once it says "older left out", ask "What is my name?". Your first message is no longer in the context, so the model can't answer, even though the message is still in Redis. (How many questions that takes depends on how long the replies are; if nothing is left out after five or six questions, restart with a smaller budget.) The model itself remembers nothing between calls; it only knows what's sent each time.
 4. **Expiry.** Start with `--ttl 30`, send a message, `/quit`, wait 30 seconds, and resume. The session is gone.
 5. **Look inside Redis.** In another terminal, run `docker compose exec redis redis-cli`, then:
 
