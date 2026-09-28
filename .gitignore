@@ -1,0 +1,14 @@
+# Python virtual environment and caches
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Telemetry logs from --telemetry (can be large, and differ per person)
+*.jsonl
+
+# API keys, if you keep them in a .env file
+.env
+
+# Operating system clutter
+.DS_Store
+Thumbs.db
